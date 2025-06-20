@@ -26,7 +26,9 @@ const Event = () => {
   const handlePlusClick = () => {
     fileInputRef.current.click();
   };
-
+  const handleRemoveImage = (indexToRemove) => {
+    setImgPreview((prev) => prev.filter((_, index) => index !== indexToRemove));
+  };
   return (
     <>
       <div className="pt-[60px] min-h-screen bg-[#F5F9FC]">
@@ -40,7 +42,7 @@ const Event = () => {
             amet.
           </p>
           <form onSubmit={submitData}>
-            <div className="w-full max-w-[620px] overflow-hidden mt-[20px] md:max-w-[763px] px-4 py-2 bg-white border-2 border-dashed border-[#D1E0E9] rounded-[30px]">
+            <div className="w-full max-w-[620px] mt-[20px] md:max-w-[763px] px-4 py-2 bg-white border-2 border-dashed border-[#D1E0E9] rounded-[30px]">
               <input
                 type="file"
                 accept="image/*"
@@ -48,23 +50,28 @@ const Event = () => {
                 multiple
                 ref={fileInputRef}
                 className="hidden"
-                name="imageInput"
-                value={inputValue.imageInput}
-                onchange={(e) => setData({ ...data, imageInput: e.target.value })}
               />
               <div className="gap-4 flex overflow-auto">
                 {ImgPreview.map((imgSrc, index) => (
-                  <img
-                    key={index}
-                    src={imgSrc}
-                    alt={`Preview ${index}`}
-                    className="w-[96px] h-[96px] rounded-[20px] object-cover"
-                  />
+                  <div key={index} className="relative">
+                    <img
+                      src={imgSrc}
+                      alt={`Preview ${index}`}
+                      className="w-[96px] h-[96px] rounded-[20px] object-cover"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => handleRemoveImage(index)}
+                      className="absolute top-[2px] right-[-8px] bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm hover:bg-red-700 transition-all"
+                    >
+                      −
+                    </button>
+                  </div>
                 ))}
                 <button
                   type="button"
                   onClick={handlePlusClick}
-                  className="max-w-[96px] min-h-[80px] w-full  rounded-[20px] border-2 border-dashed border-[#D4D4D4] flex items-center justify-center text-3xl text-[#0071BB] font-bold hover:bg-[#f0f8ff] transition-all"
+                  className="max-w-[96px] min-h-[80px] w-full shrink-0 rounded-[20px] border-2 border-dashed border-[#D4D4D4] flex items-center justify-center text-3xl text-[#0071BB] font-bold hover:bg-[#f0f8ff] transition-all"
                 >
                   +
                 </button>
@@ -73,6 +80,7 @@ const Event = () => {
             <div className="relative mt-5">
               <select
                 id="options"
+                value={data.select}
                 className="block appearance-none font-bold text-sm leading-[150%] text-[#737376] w-full py-[17.5px] bg-white px-[16px] border-[#D1E0E9] border rounded-[30px] focus:outline-none focus:ring-2 "
               >
                 <option value="Kategorie">Kategorie</option>
@@ -97,40 +105,40 @@ const Event = () => {
             </div>
             <div className="mt-[20px] flex gap-3 max-w-[763px] w-full">
               <CustomInput
-                placeholder="Titel"
+                placeholder="titel"
                 type="text"
-                value={data.Titel}
-                name="Titel"
-                onchange={(e) => setData({ ...data, Titel: e.target.value })}
+                value={data.titel}
+                name="titel"
+                onchange={(e) => setData({ ...data, titel: e.target.value })}
               />
               <CustomInput
                 placeholder="Datum"
                 type="text"
                 name="Datum"
-                value={data.Datum}
-                onchange={(e) => setData({ ...data, Datum: e.target.value })}
+                value={data.datum}
+                onchange={(e) => setData({ ...data, datum: e.target.value })}
               />
             </div>
             <div className="mt-[20px] flex gap-3 max-w-[763px] w-full">
               <CustomInput
-                value={data.Standort}
-                name="Standort"
-                onchange={(e) => setData({ ...data, Standort: e.target.value })}
-                placeholder="Standort"
+                value={data.standort}
+                name="standort"
+                onchange={(e) => setData({ ...data, standort: e.target.value })}
+                placeholder="standort"
                 type="text"
               />
               <CustomInput
-                value={data.Preis}
-                name="Preis"
-                onchange={(e) => setData({ ...data, Preis: e.target.value })}
-                placeholder="Preis"
+                value={data.preis}
+                name="preis"
+                onchange={(e) => setData({ ...data, preis: e.target.value })}
+                placeholder="preis"
                 type="text"
               />
             </div>
             <textarea
-              value={data.Textarea}
+              value={data.textarea}
               name="textarea"
-              onChange={(e) => setData({ ...data, Textarea: e.target.value })}
+              onChange={(e) => setData({ ...data, textarea: e.target.value })}
               placeholder="Details zur Veranstaltung"
               className="bg-white border border-[#D1E0E9] rounded-[30px] px-4 min-h-[132px] w-full mt-[20px] pt-[50px] font-bold text-sm leading-[150%] tracking-[-1px]"
             ></textarea>
