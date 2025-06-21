@@ -9,6 +9,14 @@ body {
     font-family: "Oswald", sans-serif;
 }
 
+.ff-Montserrat {
+    font-family: "Montserrat", sans-serif;
+}
+
+.ff-poppins {
+    font-family: "poppins", sans-serif;
+}
+
 .swiper-slide {
     width: 230px !important;
     height: 230px !important;
