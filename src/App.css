@@ -8,3 +8,41 @@ body {
 .ff-oswald {
     font-family: "Oswald", sans-serif;
 }
+
+.swiper-slide {
+    width: 230px !important;
+    height: 230px !important;
+    margin-left: 2px;
+}
+
+.swiper-slide img {
+    width: 230px !important;
+    height: 230px !important;
+    opacity: 30%;
+    transition: all 0.3s ease;
+}
+
+.swiper-slide .paragraph {
+    display: none;
+}
+
+.swiper-slide-active img {
+    width: 382px !important;
+    height: 457px !important;
+    opacity: 100%;
+}
+
+.swiper-slide-active .paragraph {
+    display: block;
+}
+
+.swiper-slide-active {
+    width: 382px !important;
+    height: 514px !important;
+    opacity: 100%;
+}
+
+.swiper-wrapper {
+    display: flex;
+    align-items: center;
+}
